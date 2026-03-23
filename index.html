@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ESCAPE OBSESSION - 탄막 서바이벌 게임. 레이저와 탄막을 피해 최대한 오래 생존하세요!">
+    <title>ESCAPE OBSESSION</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=7">
+</head>
+<body>
+    <!-- Title Screen -->
+    <div id="title-screen">
+        <div class="title-bg-effect"></div>
+        <div class="title-content">
+            <div class="title-glitch" data-text="ESCAPE">ESCAPE</div>
+            <div class="title-sub" data-text="OBSESSION">OBSESSION</div>
+            <div class="title-desc">레이저와 탄막을 피해 생존하세요</div>
+            <div class="title-controls">
+                <div class="control-item"><span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> 또는 <span class="key">↑</span><span class="key">←</span><span class="key">↓</span><span class="key">→</span> 이동</div>
+            </div>
+            <div class="mode-select" style="display:flex; gap:20px; margin-top:10px;">
+                <button id="startNormalBtn" class="neon-btn">
+                    <span class="btn-text">NORMAL CHRONICLE</span>
+                    <span class="btn-glow"></span>
+                </button>
+                <button id="startHardBtn" class="neon-btn hard-btn">
+                    <span class="btn-text">HARDCORE PROTOCOL</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+            <button id="tipsBtn" class="neon-btn" style="margin-top:20px; font-size:1rem; padding:10px 30px; border-color:#fff; color:#fff;">
+                <span class="btn-text">TIPS & INFO (적 도감)</span>
+                <span class="btn-glow" style="background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);"></span>
+            </button>
+            <div class="high-score-display" style="margin-top:20px;">
+                NORMAL BEST: <span id="title-best-normal">0.0</span>s <br>
+                HARD BEST: <span id="title-best-hard">0.0</span>s
+            </div>
+        </div>
+        <div class="scanlines"></div>
+    </div>
+
+    <!-- Tips Overlay -->
+    <div id="tips-overlay" style="display:none;">
+        <div class="tips-modal">
+            <button id="closeTipsBtn" class="close-btn">[X] CLOSE</button>
+            <h2 class="tips-title">SYSTEM ARCHIVE / TIPS</h2>
+            
+            <div class="tips-section">
+                <h3>[ 조작법 BASIC CONTROLS ]</h3>
+                <ul>
+                    <li>이동: <b>W, A, S, D</b> 또는 <b>방향키</b></li>
+                    <li>고속 대쉬 (회피기): <b>SPACE BAR</b> (4초 쿨타임 / 사용 중 완전 무적 및 강풍 무시)</li>
+                    <li>일시정지: <b>ESC</b> 또는 <b>P</b></li>
+                </ul>
+            </div>
+
+            <div class="tips-section">
+                <h3>[ 게임 모드 GAME MODES ]</h3>
+                <ul>
+                    <li><b>NORMAL CHRONICLE</b> : 순수하게 30종의 공격 패턴만 등장 (최대 57기 제한).</li>
+                    <li><b>HARDCORE PROTOCOL</b> : 화면에 최대 70기의 탄막이 쏟아지며, 시야 가림이나 둔화 등의 <b>방해 기믹 3종</b>이 추가로 발생.</li>
+                </ul>
+            </div>
+
+            <div class="tips-section">
+                <h3>[ 방해 기믹 HAZARDS ] (하드 모드 전용 / 대미지 없음)</h3>
+                <ul class="enemy-list hazard">
+                    <li><span class="e-color" style="color:#aa00ff;">■</span> <b>중력장 (Gravity Field)</b> : 거대하게 퍼져나가는 보라색 파동. 내부 진입 시 이동 속도가 극도로 느려짐.</li>
+                    <li><span class="e-color" style="color:#ffffff;">■</span> <b>강풍 (Wind)</b> : 화면을 가로지르는 흰색 기류. 플레이어를 기류 방향으로 강제로 밀어냄.</li>
+                    <li><span class="e-color" style="color:#555555;">■</span> <b>안개 (Fog)</b> : 짙은 어둠이 화면을 덮음. 플레이어 주변의 아주 좁은 시야 구역만 확보됨.</li>
+                </ul>
+            </div>
+
+            <div class="tips-section">
+                <h3>[ 1급 위험: 극한 패턴 EXTREME PATTERNS ]</h3>
+                <ul class="enemy-list">
+                    <li><span class="e-color" style="color:#ea80fc;">●</span> <b>위성 (Orbit Player)</b> : 플레이어 주변을 포위하듯 나타나 궤도를 좁혀옴. 가만히 있거나 대쉬로 빠져나가야 함.</li>
+                    <li><span class="e-color" style="color:#ffea00;">■</span> <b>장벽 (Wall)</b> : 위에서 쏟아지는 거대한 벽. 단 하나의 좁은 빈틈만 존재함.</li>
+                    <li><span class="e-color" style="color:#f50057;">▲</span> <b>삼각 그물 (Triangle Net)</b> : 3방향에서 화면보다 큰 빨간 삼각형 그물이 덮쳐옴.</li>
+                    <li><span class="e-color" style="color:#ff3d00;">■</span> <b>쌍둥이 레이저 (Twin Laser)</b> : 위아래를 가로지르며 압박해 들어오는 거대한 두 줄기 붉은색 막대.</li>
+                    <li><span class="e-color" style="color:#c6ff00;">○</span> <b>무작위 폭탄 (Random Bombs)</b> : 화면 곳곳에 무작위로 투하되어 천천히 옥죄어오는 초대형 라이트 그린 링.</li>
+                    <li><span class="e-color" style="color:#00b0ff;">●</span> <b>역결 소용돌이 (Spiral Reverse)</b> : 회전 궤도 방향이 갑자기 반대로 꺾이는 파란색 구체.</li>
+                    <li><span class="e-color" style="color:#00e676;">●</span> <b>뱀 (Snake)</b> : 일렬로 늘어서 물결치듯 뱀처럼 꼬리물고 날아오는 녹색 구체 편대.</li>
+                    <li><span class="e-color" style="color:#ff6e40;">■</span> <b>십자 포화 (Crossfire)</b> : 네 모서리에서 중앙으로 나란히 대각선 교차 사격되는 주황색 사각형.</li>
+                    <li><span class="e-color" style="color:#d500f9;">○</span> <b>고동치는 링 (Pulse Ring)</b> : 심장 박동처럼 크기가 불규칙하게 커졌다 작아지는 보라색 폭발 링.</li>
+                    <li><span class="e-color" style="color:#76ff03;">＋</span> <b>스타버스트 (Starburst)</b> : 무작위 허공에서 십자 형태로 한 번에 터져 흩어지는 파편.</li>
+                </ul>
+            </div>
+
+            <div class="tips-section">
+                <h3>[ 2급 위험: 변칙 패턴 MODIFIED PATTERNS ]</h3>
+                <ul class="enemy-list">
+                    <li><span class="e-color" style="color:#fdd835;">▲</span> <b>스웜 (Swarm)</b> : 플레이어를 향해 꿀벌 떼처럼 일제히 쇄도.</li>
+                    <li><span class="e-color" style="color:#00bcd4;">■</span> <b>레이저 넷 (Laser Grid)</b> : 가로 또는 세로축을 완전히 가로지르는 촘촘한 하늘색 사각형 그물.</li>
+                    <li><span class="e-color" style="color:#ff9800;">○</span> <b>우주 지뢰 (Mines)</b> : 플레이어와 먼 곳에 무작위로 생성되어 천천히 주변을 위협하는 덩치 큰 주황색 링.</li>
+                    <li><span class="e-color" style="color:#e040fb;">▲</span> <b>포위망 (Pincer)</b> : 양쪽 끝에서 중앙을 향해 동시에 어긋나며 좁혀오는 보라색 압박 형태.</li>
+                    <li><span class="e-color" style="color:#1de9b6;">●</span> <b>파동 곡선 (Sine Wave)</b> : 부드러운 사인(Sine)파 곡선을 그리며 위아래로 춤추듯 다가오는 민트색 구체.</li>
+                    <li><span class="e-color" style="color:#ff1744;">＋</span> <b>회전 십자 (Spinner)</b> : 정중앙에서 생성된 뒤 십자가 형태로 빙글빙글 돌며 빠르게 궤도를 넓힘.</li>
+                    <li><span class="e-color" style="color:#9c27b0;">▲</span> <b>블랙홀 (Blackhole)</b> : 맵 임의의 지점에서 외부를 향해 빨아들이듯 생성.</li>
+                    <li><span class="e-color" style="color:#ff5722;">▲</span> <b>V포메이션 (V-Shape)</b> : 양방향 V자로 꺾어지며 기만하는 주황색 삼각형.</li>
+                    <li><span class="e-color" style="color:#f44336;">●</span> <b>저격수 (Sniper)</b> : 플레이어의 현재 높낮이를 정확히 1열 정렬하여 매우 빠르게 돌진.</li>
+                    <li><span class="e-color" style="color:#ffeb3b;">○</span> <b>꽃잎 (Flower)</b> : 중앙에서 회전하며 아름답게 흩어지는 소형 노란색 링.</li>
+                </ul>
+            </div>
+
+            <div class="tips-section">
+                <h3>[ 3급 위험: 기본 패턴 BASIC PATTERNS ]</h3>
+                <ul class="enemy-list" style="columns: 2;">
+                    <li><span class="e-color" style="color:#fc00ff;">■</span> <b>버스트 (Burst)</b></li>
+                    <li><span class="e-color" style="color:#ffeb3b;">▲</span> <b>유도 (Homing)</b></li>
+                    <li><span class="e-color" style="color:#ff4444;">＋</span> <b>크로스 (Cross)</b></li>
+                    <li><span class="e-color" style="color:#00ff41;">●</span> <b>나선 (Spiral)</b></li>
+                    <li><span class="e-color" style="color:#4488ff;">■</span> <b>스윕 (Sweep)</b></li>
+                    <li><span class="e-color" style="color:#ffffff;">○</span> <b>바운스 (Bounce)</b></li>
+                    <li><span class="e-color" style="color:#03a9f4;">●</span> <b>물결 (Wave)</b></li>
+                    <li><span class="e-color" style="color:#607d8b;">■</span> <b>소나기 (Rain)</b></li>
+                    <li><span class="e-color" style="color:#e91e63;">＋</span> <b>지그재그 (Zigzag)</b></li>
+                    <li><span class="e-color" style="color:#ffffff;">■</span> <b>혼돈 (Chaos)</b></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-wrap" style="display:none;">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- HUD -->
+        <div id="ui-layer">
+            <div id="score-board">
+                <div class="score-label">SURVIVAL</div>
+                <div class="score-value"><span id="score">0.0</span><span class="score-unit">s</span></div>
+            </div>
+            <div class="life-hearts" id="life-hearts"></div>
+            <div id="dash-status">
+                <span class="label">DASH</span>
+                <div class="dash-bar"><div id="dash-fill"></div></div>
+            </div>
+            <div id="pattern-status">LASER STABILIZED</div>
+            <div id="difficulty-indicator">
+                <div class="diff-label">THREAT</div>
+                <div class="diff-bar"><div class="diff-fill" id="diff-fill"></div></div>
+            </div>
+        </div>
+
+        <!-- Best Score -->
+        <div id="best-score-hud">BEST: <span id="best-score-val">0.0</span>s</div>
+
+        <!-- Hit Overlay -->
+        <div id="hit-overlay"></div>
+
+        <!-- Warning Flash -->
+        <div id="warning-flash"></div>
+
+        <!-- Pause Overlay -->
+        <div id="pause-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); flex-direction:column; justify-content:center; align-items:center; z-index:50;">
+            <div style="font-family:'Orbitron', sans-serif; font-size:4rem; font-weight:900; color:#00dbde; letter-spacing:5px; margin-bottom:30px; text-transform:uppercase; text-shadow:0 0 20px rgba(0,219,222,0.8);">PAUSED</div>
+            <button id="resumeBtn" class="neon-btn" style="margin-bottom:15px;">
+                <span class="btn-text">계속하기 [ESC]</span>
+                <span class="btn-glow"></span>
+            </button>
+            <button id="pauseMenuBtn" class="neon-btn menu-btn">
+                <span class="btn-text">메인 메뉴</span>
+                <span class="btn-glow"></span>
+            </button>
+        </div>
+
+        <!-- Game Over -->
+        <div id="game-over">
+            <div class="go-content">
+                <div class="go-glitch" data-text="TERMINATED">TERMINATED</div>
+                <div class="go-stats">
+                    <div class="go-stat">
+                        <span class="go-stat-label">생존 시간</span>
+                        <span class="go-stat-value" id="final-score">0.0s</span>
+                    </div>
+                    <div class="go-stat">
+                        <span class="go-stat-label">최고 기록</span>
+                        <span class="go-stat-value" id="final-best">0.0s</span>
+                    </div>
+                    <div class="go-stat" id="new-record-stat" style="display:none;">
+                        <span class="go-stat-label new-record">★ NEW RECORD ★</span>
+                    </div>
+                </div>
+                <div class="mode-select" style="display:flex; gap:15px; margin-top:20px;">
+                    <button id="retryNormalBtn" class="neon-btn retry-btn">
+                        <span class="btn-text">NORMAL 재시작</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                    <button id="retryHardBtn" class="neon-btn hard-btn">
+                        <span class="btn-text">HARD 재시작</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                </div>
+                <button id="menuBtn" class="neon-btn menu-btn" style="margin-top:15px;">
+                    <span class="btn-text">메인 메뉴</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js?v=7"></script>
+</body>
+</html>
