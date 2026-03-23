@@ -1,22 +1,42 @@
-# ESCAPE: OBSESSION
+# 🌌 ESCAPE OBSESSION
 
-**ESCAPE: OBSESSION** is a high-octane bullet hell survival game built purely with HTML5 Canvas, CSS, and Vanilla JavaScript. Test your reflexes against 30 unique enemy patterns, utilize high-speed dashes with invincibility frames, and survive for as long as you can in normal or hardcore mode!
+초록색, 핑크색, 하늘색의 네온 빛이 번쩍이는 **사이버펑크 스타일의 탄막 서바이벌 게임**입니다. 사방에서 쏟아지는 33가지의 기하학적 난해한 탄막과 방해 기믹들을 피하고 최대한 오래 생존하는 것이 목표입니다.
 
-## 🎮 Features
-- **30 Unique Enemy Patterns**: From guided homing missiles to expanding spirals and chaotic bomb rains.
-- **Two Game Modes**:
-  - `NORMAL CHRONICLE`: Focus on dodging the 30 patterns.
-  - `HARDCORE PROTOCOL`: Increased enemy span rate (up to 70) and 3 new non-damaging Hazards (Wind, Fog, Gravity Field).
-- **Responsive UI & Aesthetics**: Immersive neon cyberpunk styling with parallax 3D backgrounds and glassmorphism UI.
-- **In-Game Encyclopedia**: Comprehensive "TIPS & INFO" section to study every pattern type.
-- **Quality of Life**: Auto-pause upon backgrounding and quick restart functionality.
+## ✨ 기하학적 시각 효과 (Visual Aesthetic)
+- **네온 & 글리치 (Neon & Glitch)**: 텍스트와 버튼에 적용된 RGB 글리치 애니메이션과 찬란하게 빛나는 네온 글로우.
+- **기하학 파편 폭발 (Geometric Particles)**: 적이 파괴될 때 오각형, 삼각형 등 다각형 파편으로 산산조각 나는 호쾌한 이펙트.
+- **글래스모피즘 HUD (Glassmorphism)**: 반투명한 유리 질감과 그라데이션이 적용된 세련된 인터페이스.
+- **퍼랠랙스 3D 틸트 (Parallax & 3D Tilt)**: 플레이어의 움직임에 따라 배경의 별무리와 플레이어 기체가 입체적으로 기울어지는(Tilt) 동적 연출.
 
-## ⌨️ Controls
-- **Movement**: `W`, `A`, `S`, `D` or `Arrow Keys`
-- **Dash (Invincibility + Speed)**: `SPACE BAR` (Requires 4s cooldown)
-- **Pause / Menu**: `ESC` or `P`
+## 🎮 게임 모드 (Game Modes)
+1. **NORMAL CHRONICLE (일반 모드)**
+   - 30종류의 순수 공격 패턴(버스트, 스웜, 저격수 등)만 등장.
+   - 최대 탄막 개수 57기로 제한.
+   - 피지컬과 패턴 숙련도가 중요한 정통 모드.
+2. **HARDCORE PROTOCOL (하드코어 모드)**
+   - 일반 패턴 30종에 더해 **강풍 (Wind)**, **위협적인 둔화 중력장 (Gravity Field)**, 시야를 완전히 차단하는 **침식 안개 (Fog)**가 추가.
+   - 최대 탄막 개수 70기로 증가.
+   - 최악의 억까와 혼돈 속에서 한 줄기 빛을 찾아 살아남아야 하는 극한의 모드.
 
-## 🚀 Play
-Simply open `index.html` in your web browser! No server required.
+## ⌨️ 조작법 (Controls)
+*   **이동 (Move):** `W`, `A`, `S`, `D` 또는 `방향키 (Arrow Keys)`
+*   **회피 & 기동 (Dash):** `Space Bar`
+    *   사용 즉시 빠르게 먼 거리를 이동하며, 잔상(Ghost Trail)을 남깁니다.
+    *   **완전 무적 (i-Frames)** 상태가 되어 모든 레이저와 물리적 충돌을 무시합니다.
+    *   바람(Wind)과 중력장(Gravity Field)의 방해 효과를 뚫고 돌진할 수 있습니다.
+    *   **쿨타임:** 4초 (하단 UI의 DASH 게이지로 충전 확인 가능)
+*   **일시정지 (PAUSE):** `ESC` 또는 `P` (창을 벗어나거나 다른 탭 전환 시 화면이 자동 일시정지됩니다. 재개 시 쿨타임과 패턴 사이클이 완벽하게 보전됩니다.)
 
-*Created by Junmo*
+## 📖 시스템 아카이브 (적 도감)
+메인 화면 중앙의 **[ TIPS & INFO ]** 버튼을 통해 게임 내에 등장하는 30여 종 무기/함정의 명세(색상, 형태, 회피 요령)와 등급별 위험도를 언제든 열람할 수 있습니다.
+
+## 🚀 실행 방법 (How to Play)
+외부 라이브러리(Dependencies) 없이 **순수 HTML5 Canvas + Vanilla JS**로만 제작되었습니다.
+1. 이 프로젝트 폴더를 다운로드합니다.
+2. `index.html` 파일을 크롬, 엣지, 사파리 등의 **최신 웹 브라우저**에 드래그 앤 드롭해서 열어주세요.
+3. 또는 VS Code의 **Live Server** 확장 프로그램을 사용하여 `index.html`을 실행하시면 더욱 쾌적하게 플레이할 수 있습니다.
+4. Python 3가 설치된 환경이라면 터미널에서 아래 명령어로 로컬 서버를 빠르게 열 수 있습니다:
+   ```bash
+   python3 -m http.server 3000
+   ```
+   이후 브라우저에서 `http://localhost:3000` 로 접속합니다.
