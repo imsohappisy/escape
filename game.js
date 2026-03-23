@@ -41,6 +41,8 @@
         'DANGER LEVEL UP', 'CHAOS MODE', 'EVASION CRITICAL',
         'SYSTEMS OVERLOADING', 'MAXIMUM THREAT'
     ];
+    let bgm = new Audio('bgm.mp3');
+    bgm.loop = true;
 
     // ===== INITIALIZATION =====
     function initCanvas() {
@@ -634,6 +636,8 @@
         isPaused=false;
         ctx.fillStyle='#000'; ctx.fillRect(0,0,canvasW,canvasH);
         canvas.classList.remove('glitch-effect');
+        bgm.currentTime = 0;
+        bgm.play().catch(e => console.log('BGM Autoplay blocked:', e));
         loop();
     }
 
@@ -641,6 +645,7 @@
         gameRunning=false;
         cancelAnimationFrame(animationId);
         warningFlash.classList.remove('active');
+        bgm.pause();
         
         let isNewRecord = false;
         if (isHardMode) {
@@ -671,6 +676,8 @@
         gameRunning=false;
         isPaused=false;
         cancelAnimationFrame(animationId);
+        bgm.pause();
+        bgm.currentTime = 0;
         pauseOverlay.style.display='none';
         gameWrap.style.display='none';
         titleScreen.style.display='flex';
@@ -685,6 +692,7 @@
         if (isPaused) {
             pauseStartTime = Date.now();
             pauseOverlay.style.display = 'flex';
+            bgm.pause();
         } else {
             const pausedDuration = Date.now() - pauseStartTime;
             startTime += pausedDuration;
@@ -695,6 +703,7 @@
             for (let e of enemies) e.spawnTime += pausedDuration;
             
             pauseOverlay.style.display = 'none';
+            bgm.play();
             loop();
         }
     }
