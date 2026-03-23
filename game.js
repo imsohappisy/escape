@@ -464,7 +464,7 @@
                     ctx.globalAlpha = scale * 0.4;
                     ctx.strokeStyle = '#aabbee'; ctx.lineWidth = 1;
                     for(let w=0;w<25;w++){
-                        let wx=(now*e.vx+w*140)�nvasW, wy=(now*e.vy+w*90)�nvasH;
+                        let wx=(now*e.vx+w*140)%canvasW, wy=(now*e.vy+w*90)%canvasH;
                         if(wx<0) wx+=canvasW; if(wy<0) wy+=canvasH;
                         ctx.beginPath(); ctx.moveTo(wx,wy); ctx.lineTo(wx+e.vx*12,wy+e.vy*12); ctx.stroke();
                     }
