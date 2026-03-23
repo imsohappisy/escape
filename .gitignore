@@ -1,0 +1,27 @@
+# 의존성 및 패키지 
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Mac 시스템 파일
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 윈도우 썸네일 파일
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE 설정 및 히스토리
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 로그 파일
+*.log
+
+# 젬마 브레인 디렉터리 (혹시 모를 에이전트 로그 방지)
+.gemini/
